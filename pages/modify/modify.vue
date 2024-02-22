@@ -1,7 +1,7 @@
 <template>
-	<view class="v-form">{{modify.name}}
+	<view class="v-form">
 		<view class="">
-			<h1>编辑修改内容</h1>
+			<h1>编辑{{modifyName}}相关内容</h1>
 		</view>
 		<view>
 			<form action="">
@@ -32,13 +32,19 @@
 	export default {
 		data() {
 			return {
-				modify: '',
+				modifyName: '',
 				imgsrc: '/static/addimages.png'
 			
 			
 			}
 		},
+		
 		methods: {
+			onLoad(op) {
+				
+			this.modifyName=op.name
+				console.log("op--->",this.modifyName)
+			},
 			show() {
 				uni.request({
 					url: '/modify',

@@ -22,7 +22,7 @@
 		            
 		           
 		          
-				   <td><a href="javascript:;" @click="forsubmit"> 编辑意见</a>     </td>
+				   <td><a href="javascript:;" @click="edit(item.name)"> 编辑意见</a>     </td>
 				   
 		        </tr> 
 			
@@ -52,11 +52,12 @@
 							},
 							
 							methods:{
-								forsubmit(){
+								edit(name){
 								
 									uni.navigateTo({
-										url:"/pages/modify/modify"
-									})
+										url:"/pages/modify/modify?name="+name
+									}),
+									console.log(name)
 								}	,
 								search(){
 										console.log("searching.....")
