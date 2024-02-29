@@ -22,7 +22,7 @@
 		            
 		           
 		          
-				   <td><a href="javascript:;" @click="edit(item.name)"> 编辑意见</a>     </td>
+				   <td><a href="javascript:;" @click="edit(item)"> 编辑意见</a>     </td>
 				   
 		        </tr> 
 			
@@ -52,10 +52,10 @@
 							},
 							
 							methods:{
-								edit(name){
+								edit(items){
 								
 									uni.navigateTo({
-										url:"/pages/modify/modify?name="+name
+										url:"/pages/modify/modify?name="+items.name + "&detail="+items.detail
 									}),
 									console.log(name)
 								}	,

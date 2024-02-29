@@ -16,7 +16,7 @@
 						<td>
 							<image :src="imgsrc" @click="selectImage"></image>
 						</td>
-						<td><textarea placeholder="请输入要编辑的内容" /></td>
+						<td><textarea placeholder="请输入要编辑的内容" v-model="modifyDetail"/></td>
 					</tr>
 
 				</table>
@@ -33,7 +33,8 @@
 		data() {
 			return {
 				modifyName: '',
-				imgsrc: '/static/addimages.png'
+				imgsrc: '/static/addimages.png',
+				modifyDetail:'',
 			
 			
 			}
@@ -43,7 +44,7 @@
 			onLoad(op) {
 				
 			this.modifyName=op.name
-				console.log("op--->",this.modifyName)
+			this.modifyDetail=op.detail
 			},
 			show() {
 				uni.request({
@@ -76,10 +77,12 @@
 			upload(){
 					
 				      const filePath = this.imgsrc; // 获取用户选择的第一张图片
-					let dat={'imageName':this.imageName}
+					let dat={'imageName':this.imageName,
+					'modifyName':this.modifyName,
+					'modifyDetail':this.modifyDetail}
 			
 				      uni.uploadFile({
-				        url: 'http://localhost:3000/modify', // CentOS服务器地址及API路由
+				        url: 'http://localhost:3000/upload', // CentOS服务器地址及API路由
 				        filePath: filePath,
 						
 					
@@ -87,7 +90,14 @@
 						formData:{dat:JSON.stringify(dat) },
 						//header:{'content-type': 'multipart/form-data'} ,
 				        success: (res) => {
+							  uni.request({
+					  	url:'http://localhost:3000/modify',
+						method:"post",
+						success: (res) => {
+							console.log("modif,,post.>>>>>>>>>>>")
 							
+						}
+					  })					
 				          console.log('上传成功');
 				          console.log(res)
 				          // 这里可以对返回结果进行处理或者展示提示信息等操作
@@ -98,6 +108,9 @@
 				          // 这里可以对错误进行处理或者展示提示信息等操作
 				        }
 				      });
+					
+														
+					  
 				    
 			}
 		}
