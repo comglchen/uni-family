@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		{{getdatas}}
+		<image src="http://localhost:3000/img/陈桂芳.png"></image>
 		<h2 style='text-align:center'>陈桂芳家族检索</h2>
 		    <input type="text" id="fname" name="fname" placeholder="请输入要搜索的人名" v-model="searchname"><button @click="search">搜索</button>
 		    <table style='border-collapse:collapse' >
@@ -55,7 +55,7 @@
 								edit(items){
 								
 									uni.navigateTo({
-										url:"/pages/modify/modify?name="+items.name + "&detail="+items.detail
+										url:"/pages/modify/modify?name="+items.name + "&detail="+items.detail+"&url="+items.url
 									}),
 									console.log(name)
 								}	,
@@ -78,7 +78,7 @@
 									  }
 								},
 								clickImg(item) {
-												console.log(item.url)
+												
 												uni.previewImage({
 													urls: [item.url], //需要预览的图片http链接列表，多张的时候，url直接写在后面就行了
 													current: 'item.url', // 当前显示图片的http链接，默认是第一个
